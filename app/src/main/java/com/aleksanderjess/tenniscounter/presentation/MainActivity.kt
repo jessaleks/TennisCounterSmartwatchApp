@@ -3,9 +3,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -23,13 +20,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
+import androidx.wear.tooling.preview.devices.WearDevices
 import com.aleksanderjess.tenniscounter.presentation.components.RuleSelectionScreen
+//import com.aleksanderjess.tenniscounter.presentation.components.button.SwipeScoreButtons
 import com.aleksanderjess.tenniscounter.presentation.lib.GameState
-import com.aleksanderjess.tenniscounter.presentation.lib.decreasePoint
 import com.aleksanderjess.tenniscounter.presentation.lib.getScoreName
 import com.aleksanderjess.tenniscounter.presentation.lib.isDeuce
 import com.aleksanderjess.tenniscounter.presentation.lib.playerHasAdvantage
-import com.aleksanderjess.tenniscounter.presentation.lib.scorePoint
 import com.aleksanderjess.tenniscounter.presentation.theme.TennisCounterTheme
 
 @Composable
@@ -70,43 +67,19 @@ fun TennisCounterApp(setCount: Int) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "Game Score", style = MaterialTheme.typography.display3)
-            Spacer(modifier = Modifier.height(16.dp))
+
 
             // Display game score
             Text(text = getScore(gameState, setCount), style = MaterialTheme.typography.body2)
 
-            Spacer(modifier = Modifier.height(10.dp))
+//            SwipeScoreButtons(
+//                0,
+//                0,
+//                onPlayer1ScoreChange = { it: Int -> it.inv() },
+//
+//                onPlayer2ScoreChange = { it: Int -> it.inv() }
+//            )
 
-            // Player 1 point buttons
-
-            Column {
-                LargeButton(
-
-
-                    onClick = { gameState = scorePoint(gameState, 1) },
-                    text = "P1+"
-                )
-                LargeButton(
-
-                    onClick = { gameState = decreasePoint(gameState, 1) }, text = "P1-"
-                )
-            }
-
-
-            // Player 2 point buttons
-            Column {
-                LargeButton(
-                    onClick = { gameState = scorePoint(gameState, 2) }, text = "P2+"
-                )
-                LargeButton(
-                    onClick = { gameState = decreasePoint(gameState, 2) }, text = "P2-"
-                )
-            }
-
-
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             // Reset game button
             LargeButton(
@@ -141,7 +114,7 @@ fun getScore(state: GameState, setCount: Int): String {
 }
 
 @Preview(
-    device = androidx.wear.tooling.preview.devices.WearDevices.SMALL_ROUND
+    device = WearDevices.SMALL_ROUND
 )
 @Composable()
 fun TennisCounterAppPreview() {
