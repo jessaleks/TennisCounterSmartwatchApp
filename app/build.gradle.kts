@@ -52,9 +52,9 @@ dependencies {
     implementation(libs.core.splashscreen)
     implementation(libs.navigation.runtime.ktx)
     implementation(libs.navigation.compose)
-    implementation(libs.junit.jupiter)
+
     androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
+
     debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
+    
 }

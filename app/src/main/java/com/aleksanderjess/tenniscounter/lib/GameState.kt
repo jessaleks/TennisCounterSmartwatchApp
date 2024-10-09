@@ -70,6 +70,7 @@ fun decreasePoint(state: GameState, player: Int): GameState {
     return newState
 }
 
+
 fun scorePoint(state: GameState, player: Int): GameState {
     val newState = state.copy()
 
@@ -96,7 +97,8 @@ fun scorePoint(state: GameState, player: Int): GameState {
             newState.isTiebreak = false
         } else {
             // Switch server after every odd point
-            val totalTiebreakPoints = newState.player1TiebreakPoints + newState.player2TiebreakPoints
+            val totalTiebreakPoints =
+                newState.player1TiebreakPoints + newState.player2TiebreakPoints
             if (totalTiebreakPoints % 2 == 1) {
                 return switchServer(newState)
             }
@@ -162,6 +164,7 @@ fun getScore(state: GameState): String {
 
     // Normal game score
     val gameScore = "${getScoreName(state.player1Points)} - ${getScoreName(state.player2Points)}"
-    val setScore = "${state.player1Games} - ${state.player2Games} (Sets: ${state.player1Sets} - ${state.player2Sets})"
+    val setScore =
+        "${state.player1Games} - ${state.player2Games} (Sets: ${state.player1Sets} - ${state.player2Sets})"
     return "$setScore, \n Current Game: $gameScore, \n Serving: Player ${state.servingPlayer}"
 }

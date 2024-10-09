@@ -2,10 +2,17 @@ package com.aleksanderjess.tenniscounter.presentation.components.button
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,8 +31,11 @@ fun PlayerButtonWithSwipe(
     onSwipeUp: () -> Unit,
     onSwipeDown: () -> Unit,
     currentSets: Int,
-    totalSets: Int
-) {
+    totalSets: Int,
+    isServing: Boolean,
+
+    ) {
+
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -39,8 +49,8 @@ fun PlayerButtonWithSwipe(
             repeat(totalSets) { index ->
                 Box(
                     modifier = Modifier
-                        .size(24.dp)
-                        .padding(4.dp)
+                        .size(30.dp)
+                        .padding(2.dp)
                         .background(
                             color = if (index < currentSets) Color.Green else Color.Gray,
                             shape = RoundedCornerShape(4.dp)
@@ -75,7 +85,11 @@ fun PlayerButtonWithSwipe(
                 }
         ) {
             Text(
-                text = playerName,
+                text = if (isServing) {
+                    "🟢$playerName"
+                } else {
+                    playerName
+                },
                 fontSize = 20.sp,
                 color = Color.White
             )
@@ -88,9 +102,11 @@ fun PlayerButtonWithSwipe(
 fun PreviewSwipeableScoreButtons() {
     return PlayerButtonWithSwipe(
         "1",
-        onSwipeUp = { -> it.inc() },
-        onSwipeDown = TODO(),
-        currentSets = TODO(),
-        totalSets = TODO(),
-    )
+        onSwipeUp = {},
+        onSwipeDown = { },
+        currentSets = 1,
+        totalSets = 3,
+        isServing = false,
+
+        )
 }

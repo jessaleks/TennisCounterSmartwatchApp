@@ -22,11 +22,14 @@ import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
 import androidx.wear.tooling.preview.devices.WearDevices
 import com.aleksanderjess.tenniscounter.presentation.components.RuleSelectionScreen
+import com.aleksanderjess.tenniscounter.presentation.components.button.PlayerButtonWithSwipe
 //import com.aleksanderjess.tenniscounter.presentation.components.button.SwipeScoreButtons
 import com.aleksanderjess.tenniscounter.presentation.lib.GameState
+import com.aleksanderjess.tenniscounter.presentation.lib.decreasePoint
 import com.aleksanderjess.tenniscounter.presentation.lib.getScoreName
 import com.aleksanderjess.tenniscounter.presentation.lib.isDeuce
 import com.aleksanderjess.tenniscounter.presentation.lib.playerHasAdvantage
+import com.aleksanderjess.tenniscounter.presentation.lib.scorePoint
 import com.aleksanderjess.tenniscounter.presentation.theme.TennisCounterTheme
 
 @Composable
@@ -71,6 +74,16 @@ fun TennisCounterApp(setCount: Int) {
 
             // Display game score
             Text(text = getScore(gameState, setCount), style = MaterialTheme.typography.body2)
+            PlayerButtonWithSwipe(
+                "P1",
+                onSwipeUp = { scorePoint(gameState
+                    , 1) },
+                onSwipeDown = {
+                    decreasePoint(gameState, 1)
+                },
+                currentSets = gameState.player1Sets,
+                totalSets = setCount,
+            )
 
 //            SwipeScoreButtons(
 //                0,
@@ -80,11 +93,9 @@ fun TennisCounterApp(setCount: Int) {
 //                onPlayer2ScoreChange = { it: Int -> it.inv() }
 //            )
 
-
             // Reset game button
             LargeButton(
-                onClick = { gameState = GameState() },
-                text = "Reset"
+                onClick = { gameState = GameState() }, text = "Reset"
             )
         }
     }
