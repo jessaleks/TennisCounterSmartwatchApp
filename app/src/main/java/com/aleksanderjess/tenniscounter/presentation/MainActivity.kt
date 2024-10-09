@@ -3,10 +3,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -21,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.Text
@@ -78,40 +75,43 @@ fun TennisCounterApp(setCount: Int) {
             // Display game score
             Text(text = getScore(gameState, setCount), style = MaterialTheme.typography.body2)
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(10.dp))
 
             // Player 1 point buttons
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Button(onClick = { gameState = scorePoint(gameState, 1) }) {
-                    Text("Player 1 Scores")
-                }
-                Button(onClick = { gameState = decreasePoint(gameState, 1) }) {
-                    Text("Decrease Player 1 Points")
-                }
+
+            Column {
+                LargeButton(
+
+
+                    onClick = { gameState = scorePoint(gameState, 1) },
+                    text = "P1+"
+                )
+                LargeButton(
+
+                    onClick = { gameState = decreasePoint(gameState, 1) }, text = "P1-"
+                )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
 
             // Player 2 point buttons
-            Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Button(onClick = { gameState = scorePoint(gameState, 2) }) {
-                    Text("Player 2 Scores")
-                }
-                Button(onClick = { gameState = decreasePoint(gameState, 2) }) {
-                    Text("Decrease Player 2 Points")
-                }
+            Column {
+                LargeButton(
+                    onClick = { gameState = scorePoint(gameState, 2) }, text = "P2+"
+                )
+                LargeButton(
+                    onClick = { gameState = decreasePoint(gameState, 2) }, text = "P2-"
+                )
             }
+
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
             // Reset game button
-            Button(onClick = { gameState = GameState() }) {
-                Text("Reset Game")
-            }
+            LargeButton(
+                onClick = { gameState = GameState() },
+                text = "Reset"
+            )
         }
     }
 }
