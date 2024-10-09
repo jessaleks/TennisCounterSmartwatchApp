@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -139,7 +140,9 @@ fun getScore(state: GameState, setCount: Int): String {
     return "$setScore,\n Current Game: $gameScore,\n Serving: Player ${state.servingPlayer}\n"
 }
 
-@Preview()
+@Preview(
+    device = androidx.wear.tooling.preview.devices.WearDevices.SMALL_ROUND
+)
 @Composable()
 fun TennisCounterAppPreview() {
     TennisCounterApp(3)
