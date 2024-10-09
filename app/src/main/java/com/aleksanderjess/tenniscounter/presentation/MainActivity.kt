@@ -76,13 +76,33 @@ fun TennisCounterApp(setCount: Int) {
             Text(text = getScore(gameState, setCount), style = MaterialTheme.typography.body2)
             PlayerButtonWithSwipe(
                 "P1",
-                onSwipeUp = { scorePoint(gameState
-                    , 1) },
+                onSwipeUp = {
+                    scorePoint(
+                        gameState, 1
+                    )
+                },
                 onSwipeDown = {
                     decreasePoint(gameState, 1)
                 },
                 currentSets = gameState.player1Sets,
                 totalSets = setCount,
+
+                isServing = gameState.servingPlayer == 1,
+            )
+            PlayerButtonWithSwipe(
+                "P2",
+                onSwipeUp = {
+                    scorePoint(
+                        gameState, 2
+                    )
+                },
+                onSwipeDown = {
+                    decreasePoint(gameState, 2)
+                },
+                currentSets = gameState.player1Sets,
+                totalSets = setCount,
+
+                isServing = gameState.servingPlayer == 2,
             )
 
 //            SwipeScoreButtons(
