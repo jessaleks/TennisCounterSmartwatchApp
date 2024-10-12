@@ -4,6 +4,7 @@ import GameState
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,7 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.wear.compose.material3.Button
+import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
+import androidx.wear.compose.material3.TimeText
 import com.aleksanderjess.tenniscounter.annotations.SmallRoundWearPreview
 import com.aleksanderjess.tenniscounter.annotations.SquareWearPreview
 import decreasePoint
@@ -55,7 +58,12 @@ fun MatchScreen(navController: NavHostController, setsToWin: Int = 2) {
     } else {
         5.dp
     }
-
+    TimeText(
+        timeTextStyle = MaterialTheme.typography.bodySmall,
+        contentPadding = PaddingValues(2.dp)
+    ) {
+        time()
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()

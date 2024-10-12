@@ -57,6 +57,9 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.material3.android)
     implementation(libs.ui.text.google.fonts)
+    implementation(libs.junit.jupiter)
+    implementation(libs.testng)
+    implementation(libs.ui.test.junit4.android)
 
     androidTestImplementation(platform(libs.compose.bom))
 
