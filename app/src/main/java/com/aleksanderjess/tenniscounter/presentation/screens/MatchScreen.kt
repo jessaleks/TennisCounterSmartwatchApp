@@ -23,6 +23,7 @@ import androidx.wear.compose.material3.Button
 import androidx.wear.compose.material3.Text
 import com.aleksanderjess.tenniscounter.annotations.SmallRoundWearPreview
 import com.aleksanderjess.tenniscounter.annotations.SquareWearPreview
+
 import decreasePoint
 import getScore
 import scorePoint
@@ -37,7 +38,7 @@ fun MatchScreen(navController: NavHostController) {
             .padding(5.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        Text(getScore(gameState), modifier = Modifier.padding(16.dp))
+        Text(getScore(gameState), modifier = Modifier.padding(10.dp))
 
         Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {

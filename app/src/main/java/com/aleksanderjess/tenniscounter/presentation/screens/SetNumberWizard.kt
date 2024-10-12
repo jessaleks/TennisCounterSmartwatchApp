@@ -27,7 +27,7 @@ import com.aleksanderjess.tenniscounter.presentation.Screen
 fun SetWizardScreen(navController: NavHostController) {
     val setValues = intListOf(1, 3, 5)
     var setIndex by remember { mutableIntStateOf(0) }
-
+    
     Column(
         modifier = Modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.Center,
@@ -44,13 +44,16 @@ fun SetWizardScreen(navController: NavHostController) {
             onValueChange = { setIndex = it.toInt() }, // Update the index
             valueRange = 0f..2f,
             steps = 1,
-            modifier = Modifier.padding(10.dp)
-        )
+            modifier = Modifier.padding(10.dp),
+
+            )
 
 
-        Button(onClick = {
-            navController.navigate(Screen.MatchScreen.route)
-        }) {
+        Button(
+
+            onClick = {
+                navController.navigate(Screen.MatchScreen.route)
+            }) {
             Text("Start Match")
         }
     }

@@ -21,8 +21,7 @@ fun LargeButton(
     onClick: () -> Unit,
     text: String,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colors.primary,
-    contentColor: Color = MaterialTheme.colors.onPrimary,
+
     icon: @Composable (() -> Unit)? = null
 ) {
     Button(
@@ -30,13 +29,10 @@ fun LargeButton(
         modifier = modifier
             .padding(8.dp)
             .height(60.dp)
-            .fillMaxWidth(), // Adjust height if necessary
-        colors = buttonColors(
-            backgroundColor = backgroundColor,
-            contentColor = contentColor
-        ),
+            .fillMaxWidth(0.5f), // Adjust height if necessary
 
-        ) {
+
+    ) {
         if (icon != null) {
             Row(
                 horizontalArrangement = Arrangement.Center,

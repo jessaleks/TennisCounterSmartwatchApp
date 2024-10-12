@@ -10,22 +10,30 @@ import com.aleksanderjess.tenniscounter.presentation.Screen
 import com.aleksanderjess.tenniscounter.presentation.screens.MatchHistoryScreen
 import com.aleksanderjess.tenniscounter.presentation.screens.MatchScreen
 import com.aleksanderjess.tenniscounter.presentation.screens.SetWizardScreen
+import com.aleksanderjess.tenniscounter.presentation.theme.AppTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val navController = rememberNavController()
-            WearTennisApp(navController)
+            AppTheme {
+                val navController = rememberNavController()
+                WearTennisApp(navController)
+            }
         }
     }
 }
 
 @Composable
 fun WearTennisApp(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.MatchHistory.route) {
-        composable(Screen.MatchHistory.route) { MatchHistoryScreen(navController) }
-        composable(Screen.SetWizard.route) { SetWizardScreen(navController) }
-        composable(Screen.MatchScreen.route) { MatchScreen(navController) }
+    AppTheme {
+        NavHost(navController = navController, startDestination = Screen.MatchHistory.route) {
+            composable(Screen.MatchHistory.route) {
+                MatchHistoryScreen(navController)
+            }
+            composable(Screen.SetWizard.route) { SetWizardScreen(navController) }
+            composable(Screen.MatchScreen.route) { MatchScreen(navController) }
+        }
     }
 }

@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.compose.material3)
     implementation(libs.material3.android)
+    implementation(libs.ui.text.google.fonts)
 
     androidTestImplementation(platform(libs.compose.bom))
 
