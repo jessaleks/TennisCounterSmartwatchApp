@@ -27,7 +27,7 @@ import com.aleksanderjess.tenniscounter.presentation.Screen
 fun SetWizardScreen(navController: NavHostController) {
     val setValues = intListOf(1, 3, 5)
     var setIndex by remember { mutableIntStateOf(0) }
-    
+
     Column(
         modifier = Modifier.fillMaxHeight(),
         verticalArrangement = Arrangement.Center,
