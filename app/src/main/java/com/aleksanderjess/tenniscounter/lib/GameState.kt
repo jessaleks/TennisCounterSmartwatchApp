@@ -112,8 +112,14 @@ fun decreasePoint(state: GameState, player: Int): GameState {
 }
 
 fun getScore(state: GameState): String {
-    if (state.player1Sets == state.setsToWin) return "Player 1 wins the match"
-    if (state.player2Sets == state.setsToWin) return "Player 2 wins the match"
+    if (state.player1Sets == state.setsToWin) {
+        state.isMatchOver = true
+        return "Player 1 wins the match"
+    }
+    if (state.player2Sets == state.setsToWin) {
+        state.isMatchOver = true
+        return "Player 2 wins the match"
+    }
 
     if (state.isTiebreak) return "Tiebreak: ${state.player1TiebreakPoints} - ${state.player2TiebreakPoints}, Serving: Player ${state.servingPlayer}"
     if (isDeuce(state)) return "Deuce, Serving: Player ${state.servingPlayer}"
