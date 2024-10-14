@@ -10,7 +10,9 @@ data class GameState(
     var player1TiebreakPoints: Int = 0,
     var player2TiebreakPoints: Int = 0,
     var isTiebreak: Boolean = false,
-    var servingPlayer: Int = 1 // 1 for Player 1, 2 for Player 2
+    var servingPlayer: Int = 1, // 1 for Player 1, 2 for Player 2
+    var isMatchOver: Boolean = false,
+    var setsToWin: Int = 3
 )
 
 val scoreNames = listOf("0", "15", "30", "40")
@@ -24,7 +26,7 @@ fun playerHasAdvantage(state: GameState): Boolean =
     abs(state.player1Points - state.player2Points) == 1 && (state.player1Points > 3 || state.player2Points > 3)
 
 fun playerHasWonGame(state: GameState): Boolean =
-    (state.player1Points >= 4 || state.player2Points >= 4) && Math.abs(state.player1Points - state.player2Points) >= 2
+    (state.player1Points >= 4 || state.player2Points >= 4) && abs(state.player1Points - state.player2Points) >= 2
 
 fun playerHasWonSet(playerGames: Int, opponentGames: Int): Boolean =
     playerGames >= 6 && (playerGames - opponentGames) >= 2
@@ -110,8 +112,8 @@ fun decreasePoint(state: GameState, player: Int): GameState {
 }
 
 fun getScore(state: GameState): String {
-    if (state.player1Sets == 3) return "Player 1 wins the match"
-    if (state.player2Sets == 3) return "Player 2 wins the match"
+    if (state.player1Sets == state.setsToWin) return "Player 1 wins the match"
+    if (state.player2Sets == state.setsToWin) return "Player 2 wins the match"
 
     if (state.isTiebreak) return "Tiebreak: ${state.player1TiebreakPoints} - ${state.player2TiebreakPoints}, Serving: Player ${state.servingPlayer}"
     if (isDeuce(state)) return "Deuce, Serving: Player ${state.servingPlayer}"

@@ -25,7 +25,7 @@ import com.aleksanderjess.tenniscounter.presentation.Screen
 
 @Composable
 fun SetWizardScreen(navController: NavHostController) {
-    val setValues = intListOf(1, 3, 5)
+    val setValues = intListOf(1, 2, 3)
     var setIndex by remember { mutableIntStateOf(0) }
 
     Column(
@@ -33,9 +33,8 @@ fun SetWizardScreen(navController: NavHostController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Text(
-            "Sets: ${setValues[setIndex]}",
+            "Sets to win: ${setValues[setIndex]}",
             modifier = Modifier.padding(5.dp),
             style = MaterialTheme.typography.titleLarge
         )
@@ -45,14 +44,11 @@ fun SetWizardScreen(navController: NavHostController) {
             valueRange = 0f..2f,
             steps = 1,
             modifier = Modifier.padding(10.dp),
-
-            )
-
+        )
 
         Button(
-
             onClick = {
-                navController.navigate(Screen.MatchScreen.route)
+                navController.navigate(Screen.MatchScreen.createRoute(setValues[setIndex]))
             }) {
             Text("Start Match")
         }

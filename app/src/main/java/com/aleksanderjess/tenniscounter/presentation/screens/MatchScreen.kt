@@ -4,6 +4,7 @@ import GameState
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,28 +18,56 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.wear.compose.material3.Button
+
+
 import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
+import androidx.wear.compose.material3.TimeText
+import androidx.wear.compose.material3.TimeText
 import com.aleksanderjess.tenniscounter.annotations.SmallRoundWearPreview
 import com.aleksanderjess.tenniscounter.annotations.SquareWearPreview
-
 import decreasePoint
 import getScore
 import scorePoint
 
 @Composable
-fun MatchScreen(navController: NavHostController) {
+fun MatchScreen(navController: NavHostController, setsToWin: Int = 2) {
     var gameState by remember { mutableStateOf(GameState()) }
+    var padding: Dp = 0.dp
 
-    // if the screen is round, set the variable padding to 15.dp, otherwise set it to 5.dp
-    var padding = 5.dp
-    if (Configuration().isScreenRound) {
-        padding = 15.dp
+    if (gameState.isMatchOver) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text("Match Over", modifier = Modifier.padding(10.dp))
+
+            Button(onClick = {
+                gameState = GameState()
+            }) {
+                Text("New Match")
+            }
+        }
     }
+    padding = if (Configuration().isScreenRound) {
+        16.dp
+    } else {
+        5.dp
+    }
+    TimeText(
+        timeTextStyle = MaterialTheme.typography.bodySmall,
+        contentPadding = PaddingValues(2.dp)
+    ) {
+        time()
+    }
+    // if the screen is round, set the variable padding to 15.dp, otherwise set it to 5.dp
 
     Column(
         modifier = Modifier
@@ -46,13 +75,12 @@ fun MatchScreen(navController: NavHostController) {
             .padding(padding),
         verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            getScore(gameState),
-            modifier = Modifier.padding(10.dp),
-            style = MaterialTheme.typography.bodySmall
-        )
+        Text(getScore(gameState), modifier = Modifier.padding(padding))
 
-        Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Button(onClick = { gameState = scorePoint(gameState, 1) }) {
                     Text("P1+")
@@ -80,5 +108,5 @@ fun MatchScreen(navController: NavHostController) {
 @SmallRoundWearPreview
 @Composable
 fun MatchScreenPreview() {
-    return MatchScreen(rememberNavController());
+    return MatchScreen(rememberNavController(), 3)
 }
