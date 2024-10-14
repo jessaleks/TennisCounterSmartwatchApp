@@ -1,3 +1,5 @@
+package com.aleksanderjess.tenniscounter.presentation
+
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -6,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.aleksanderjess.tenniscounter.presentation.Screen
 import com.aleksanderjess.tenniscounter.presentation.screens.MatchScreen
 import com.aleksanderjess.tenniscounter.presentation.screens.SetWizardScreen
 import com.aleksanderjess.tenniscounter.presentation.theme.AppTheme

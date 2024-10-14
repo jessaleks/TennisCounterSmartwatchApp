@@ -1,6 +1,7 @@
 package com.aleksanderjess.tenniscounter.presentation.screens
 
 import GameState
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.wear.compose.material3.Button
+import androidx.wear.compose.material3.MaterialTheme
 import androidx.wear.compose.material3.Text
 import com.aleksanderjess.tenniscounter.annotations.SmallRoundWearPreview
 import com.aleksanderjess.tenniscounter.annotations.SquareWearPreview
@@ -32,13 +34,23 @@ import scorePoint
 fun MatchScreen(navController: NavHostController) {
     var gameState by remember { mutableStateOf(GameState()) }
 
+    // if the screen is round, set the variable padding to 15.dp, otherwise set it to 5.dp
+    var padding = 5.dp
+    if (Configuration().isScreenRound) {
+        padding = 15.dp
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(5.dp),
+            .padding(padding),
         verticalArrangement = Arrangement.Center
     ) {
-        Text(getScore(gameState), modifier = Modifier.padding(10.dp))
+        Text(
+            getScore(gameState),
+            modifier = Modifier.padding(10.dp),
+            style = MaterialTheme.typography.bodySmall
+        )
 
         Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
