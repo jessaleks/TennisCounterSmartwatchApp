@@ -1,21 +1,9 @@
 package com.aleksanderjess.tenniscounter.lib
 
-
-import GameState
-import decreasePoint
-import getScore
-import getScoreName
-import isDeuce
-import isTiebreakCondition
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import playerHasAdvantage
-import playerHasWonGame
-import playerHasWonSet
-import playerHasWonTiebreak
-import scorePoint
 
 class GameStateTest {
 

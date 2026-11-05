@@ -1,6 +1,5 @@
 package com.aleksanderjess.tenniscounter.presentation.screens
 
-import GameState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,14 +23,15 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.aleksanderjess.tenniscounter.annotations.SmallRoundWearPreview
 import com.aleksanderjess.tenniscounter.annotations.SquareWearPreview
+import com.aleksanderjess.tenniscounter.lib.GameState
+import com.aleksanderjess.tenniscounter.lib.decreasePoint
+import com.aleksanderjess.tenniscounter.lib.getScore
+import com.aleksanderjess.tenniscounter.lib.scorePoint
 import com.aleksanderjess.tenniscounter.presentation.Screen
-import decreasePoint
-import getScore
-import scorePoint
 
 @Composable
-fun MatchScreen(navController: NavController) {
-    var gameState by remember { mutableStateOf(GameState()) }
+fun MatchScreen(navController: NavController, setsToWin: Int = 3) {
+    var gameState by remember { mutableStateOf(GameState(setsToWin = setsToWin)) }
 
     if (gameState.isMatchOver) {
         // Display match winner
@@ -44,7 +44,7 @@ fun MatchScreen(navController: NavController) {
                 text = getScore(gameState), style = MaterialTheme.typography.titleLarge
             )
             Button(
-                onClick = { navController.navigate(Screen.SetWizard) },
+                onClick = { navController.navigate(Screen.SetWizard.route) },
 
                 ) {
                 Text(

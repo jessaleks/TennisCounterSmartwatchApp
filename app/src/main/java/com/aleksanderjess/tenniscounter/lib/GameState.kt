@@ -1,3 +1,5 @@
+package com.aleksanderjess.tenniscounter.lib
+
 import kotlin.math.abs
 
 data class GameState(
