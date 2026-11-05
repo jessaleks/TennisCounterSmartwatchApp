@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -134,14 +135,18 @@ fun PlayerScoreRow(
         // Player name with serving indicator
         Text(
             text = "$player ${if (serving) "🎾" else ""}",
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .testTag(scoreTag(player, "name")),
             style = MaterialTheme.typography.titleMedium
         )
 
         // Current game score
         Text(
             text = "Points: $currentPoints",
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier
+                .padding(8.dp)
+                .testTag(scoreTag(player, "points")),
             style = MaterialTheme.typography.titleMedium
         )
 
@@ -149,7 +154,9 @@ fun PlayerScoreRow(
         games.forEachIndexed { index, gameScore ->
             Text(
                 text = "Set ${index + 1}: $gameScore",
-                modifier = Modifier.padding(8.dp),
+                modifier = Modifier
+                    .padding(8.dp)
+                    .testTag(scoreTag(player, "set${index + 1}")),
                 style = MaterialTheme.typography.bodyLarge
             )
         }
@@ -163,3 +170,6 @@ fun PlayerScoreRow(
 fun MatchScreenPreview() {
     return MatchScreen(rememberNavController())
 }
+
+private fun scoreTag(player: String, part: String): String =
+    "${player.replace(" ", "").lowercase()}_$part"

@@ -1,16 +1,24 @@
 package com.aleksanderjess.tenniscounter.presentation.screens
 
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
+import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.testing.TestNavHostController
+import com.aleksanderjess.tenniscounter.presentation.Screen
+import com.aleksanderjess.tenniscounter.presentation.WearTennisApp
+import com.aleksanderjess.tenniscounter.presentation.theme.AppTheme
+import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 
 class SetWizardScreenTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule()
+    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
     @Test
     fun testSetWizardScreenDisplaysSetsToWin() {
@@ -18,16 +26,28 @@ class SetWizardScreenTest {
             SetWizardScreen(navController = rememberNavController())
         }
 
-        composeTestRule.onNodeWithText("Sets to win: 1").assertExists()
+        composeTestRule.onNodeWithText("Sets to win: 1").assertIsDisplayed()
     }
 
     @Test
     fun testSetWizardScreenButtonClick() {
+        val navController = TestNavHostController(composeTestRule.activity)
+        composeTestRule.runOnUiThread {
+            navController.navigatorProvider.addNavigator(ComposeNavigator())
+        }
         composeTestRule.setContent {
-            SetWizardScreen(navController = rememberNavController())
+            AppTheme {
+                WearTennisApp(navController)
+            }
         }
 
         composeTestRule.onNodeWithText("Start Match").performClick()
-        // Add assertions to verify navigation if needed
+
+        composeTestRule.onNodeWithText("P1+").assertIsDisplayed()
+        composeTestRule.runOnIdle {
+            val entry = navController.currentBackStackEntry
+            assertEquals(Screen.MatchScreen.route, entry?.destination?.route)
+            assertEquals("1", entry?.arguments?.getString("setsToWin"))
+        }
     }
 }
