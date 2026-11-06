@@ -39,7 +39,7 @@ The connection port is the one shown on the Wireless debugging screen itself, no
 If the release signing secrets are not set, each CI run signs the debug APK with a different debug key. If a debug build from an earlier run is already installed, `adb install -r` fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`. Uninstall the old build first. This deletes the app's data on the watch:
 
 ```bash
-adb uninstall <applicationId>
+adb uninstall com.aleksanderjess.tenniscounter
 adb install <file>.apk
 ```
 
