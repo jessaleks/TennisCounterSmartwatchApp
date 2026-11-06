@@ -14,9 +14,11 @@ Enable developer options on the watch, then turn on **ADB debugging** (and **Deb
 
 USB, when the watch is tethered through a phone or dock:
 
+Replace `<file>.apk` with the APK you downloaded: `tennis-counter-debug-<sha>.apk` or `tennis-counter-release-<sha>.apk`.
+
 ```bash
 adb devices
-adb install -r tennis-counter-debug-<sha>.apk
+adb install -r <file>.apk
 ```
 
 Wireless debugging:
@@ -29,10 +31,25 @@ Wireless debugging:
 adb pair <watch-ip>:<pairing-port>
 adb connect <watch-ip>:<connection-port>
 adb devices
-adb install -r tennis-counter-debug-<sha>.apk
+adb install -r <file>.apk
 ```
 
 The connection port is the one shown on the Wireless debugging screen itself, not the temporary pairing port.
+
+To let debug builds update in place, add your local debug keystore as the `DEBUG_KEYSTORE_BASE64` repository secret. It's free and is created by Android Studio or the first local build:
+
+```bash
+base64 -w0 ~/.android/debug.keystore
+```
+
+Without that secret, each CI run signs with a different debug key. If a debug build from an earlier run is already installed, `adb install -r` fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`. Uninstall the old build first. This deletes the app's data on the watch:
+
+```bash
+adb uninstall <applicationId>
+adb install <file>.apk
+```
+
+Release APKs signed with the same keystore secrets update in place.
 
 ### Optional release signing
 
