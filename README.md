@@ -36,13 +36,7 @@ adb install -r <file>.apk
 
 The connection port is the one shown on the Wireless debugging screen itself, not the temporary pairing port.
 
-To let debug builds update in place, add your local debug keystore as the `DEBUG_KEYSTORE_BASE64` repository secret. It's free and is created by Android Studio or the first local build:
-
-```bash
-base64 -w0 ~/.android/debug.keystore
-```
-
-Without that secret, each CI run signs with a different debug key. If a debug build from an earlier run is already installed, `adb install -r` fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`. Uninstall the old build first. This deletes the app's data on the watch:
+If the release signing secrets are not set, each CI run signs the debug APK with a different debug key. If a debug build from an earlier run is already installed, `adb install -r` fails with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`. Uninstall the old build first. This deletes the app's data on the watch:
 
 ```bash
 adb uninstall <applicationId>
