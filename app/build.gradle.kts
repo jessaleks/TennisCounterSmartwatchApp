@@ -3,6 +3,17 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+val keystoreFile = System.getenv("KEYSTORE_FILE")
+val keystorePassword = System.getenv("KEYSTORE_PASSWORD")
+val keystoreAlias = System.getenv("KEY_ALIAS")
+val keystoreKeyPassword = System.getenv("KEY_PASSWORD")
+val releaseSigningConfigured = listOf(
+    keystoreFile,
+    keystorePassword,
+    keystoreAlias,
+    keystoreKeyPassword,
+).all { !it.isNullOrBlank() }
+
 android {
     namespace = "com.aleksanderjess.tenniscounter"
     compileSdk {
@@ -19,8 +30,22 @@ android {
         versionName = "1.0"
     }
 
+    if (releaseSigningConfigured) {
+        signingConfigs {
+            create("release") {
+                storeFile = file(keystoreFile!!)
+                storePassword = keystorePassword
+                keyAlias = keystoreAlias
+                keyPassword = keystoreKeyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (releaseSigningConfigured) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),

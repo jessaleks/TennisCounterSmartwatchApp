@@ -1,0 +1,94 @@
+name: Sideload APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  apk:
+    name: Test and build APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+
+      - name: Install SDK packages
+        run: sdkmanager --install "platforms;android-37.2" "build-tools;37.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Run unit tests
+        run: ./gradlew test --stacktrace
+
+      - name: Detect release signing secrets
+        id: signing
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          if [ -n "${KEYSTORE_BASE64}" ] && [ -n "${KEYSTORE_PASSWORD}" ] && [ -n "${KEY_ALIAS}" ] && [ -n "${KEY_PASSWORD}" ]; then
+            echo "${KEYSTORE_BASE64}" | base64 --decode > "${RUNNER_TEMP}/release.keystore"
+            echo "enabled=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "Release signing secrets are incomplete. Building the debug APK."
+            echo "enabled=false" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Build signed release APK
+        if: steps.signing.outputs.enabled == 'true'
+        env:
+          KEYSTORE_FILE: ${{ runner.temp }}/release.keystore
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew assembleRelease --stacktrace
+
+      - name: Build debug APK
+        if: steps.signing.outputs.enabled != 'true'
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Name the APK
+        id: apk
+        env:
+          SIGNING_ENABLED: ${{ steps.signing.outputs.enabled }}
+        run: |
+          short_sha="$(git rev-parse --short HEAD)"
+          if [ "${SIGNING_ENABLED}" = "true" ]; then
+            source_apk="app/build/outputs/apk/release/app-release.apk"
+            variant="release"
+          else
+            source_apk="app/build/outputs/apk/debug/app-debug.apk"
+            variant="debug"
+          fi
+          test -f "${source_apk}"
+          dest="tennis-counter-${variant}-${short_sha}.apk"
+          cp "${source_apk}" "${dest}"
+          echo "path=${dest}" >> "${GITHUB_OUTPUT}"
+          echo "sha=${short_sha}" >> "${GITHUB_OUTPUT}"
+          echo "variant=${variant}" >> "${GITHUB_OUTPUT}"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: tennis-counter-apk-${{ steps.apk.outputs.sha }}
+          path: ${{ steps.apk.outputs.path }}
+          if-no-files-found: error
+          retention-days: 90
