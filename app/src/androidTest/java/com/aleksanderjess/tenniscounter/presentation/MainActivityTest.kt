@@ -36,7 +36,8 @@ class MainActivityTest {
 
         composeTestRule.onNodeWithText("P1+").assertIsDisplayed()
         composeTestRule.onNodeWithText("Player 1 🎾").assertIsDisplayed()
-        composeTestRule.onNodeWithText("P2+").assertExists()
+        composeTestRule.onNodeWithText("P2+").assertIsDisplayed()
+        composeTestRule.onNodeWithText("P2-").assertIsDisplayed()
         composeTestRule.runOnIdle {
             val entry = navController.currentBackStackEntry
             assertEquals(Screen.MatchScreen.route, entry?.destination?.route)

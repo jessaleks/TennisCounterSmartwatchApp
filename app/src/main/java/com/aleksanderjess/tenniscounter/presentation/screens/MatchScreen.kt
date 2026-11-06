@@ -2,6 +2,7 @@ package com.aleksanderjess.tenniscounter.presentation.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -54,46 +55,51 @@ fun MatchScreen(navController: NavController, setsToWin: Int = 3) {
             }
         }
     } else {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Row {
-            Button(
-                onClick = { gameState = scorePoint(gameState, 1) },
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text("P1+")
-            }
-            Button(
-                onClick = { gameState = decreasePoint(gameState, 1) },
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text("P1-")
-            }
-        }
-
-
-        // Match Score Table
-        ScoreTable(gameState)
-
-
-        Row {
-            Button(
-                onClick = { gameState = scorePoint(gameState, 2) },
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text("P2+")
-            }
-            Button(
-                onClick = { gameState = scorePoint(gameState, 2) },
-                modifier = Modifier.padding(8.dp)
-            ) {
-                Text("P2-")
-            }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp, vertical = 6.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
+        ) {
+            ScoreButtons(
+                plusLabel = "P1+",
+                minusLabel = "P1-",
+                onPlus = { gameState = scorePoint(gameState, 1) },
+                onMinus = { gameState = decreasePoint(gameState, 1) },
+            )
+            ScoreTable(gameState)
+            ScoreButtons(
+                plusLabel = "P2+",
+                minusLabel = "P2-",
+                onPlus = { gameState = scorePoint(gameState, 2) },
+                onMinus = { gameState = decreasePoint(gameState, 2) },
+            )
         }
     }
+}
+
+@Composable
+private fun ScoreButtons(
+    plusLabel: String,
+    minusLabel: String,
+    onPlus: () -> Unit,
+    onMinus: () -> Unit,
+) {
+    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+        ScoreButton(plusLabel, onPlus)
+        ScoreButton(minusLabel, onMinus)
+    }
+}
+
+@Composable
+private fun ScoreButton(label: String, onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        modifier = Modifier.height(32.dp),
+        contentPadding = PaddingValues(horizontal = 12.dp, vertical = 0.dp),
+    ) {
+        Text(label, style = MaterialTheme.typography.labelLarge)
     }
 }
 
@@ -110,7 +116,7 @@ fun ScoreTable(gameState: GameState) {
             serving = gameState.servingPlayer == 1
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(2.dp))
 
         // Row for Player 2's scores
         PlayerScoreRow(
@@ -127,39 +133,33 @@ fun PlayerScoreRow(
     player: String, currentPoints: Int, games: List<Int>, // List of games per set
     serving: Boolean
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        // Player name with serving indicator
-        Text(
-            text = "$player ${if (serving) "🎾" else ""}",
-            modifier = Modifier
-                .padding(8.dp)
-                .testTag(scoreTag(player, "name")),
-            style = MaterialTheme.typography.titleMedium
-        )
-
-        // Current game score
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text(
+                text = "$player ${if (serving) "🎾" else ""}",
+                modifier = Modifier.testTag(scoreTag(player, "name")),
+                style = MaterialTheme.typography.bodyMedium,
+                maxLines = 1
+            )
+            games.forEachIndexed { index, gameScore ->
+                Text(
+                    text = "Set ${index + 1}: $gameScore",
+                    modifier = Modifier.testTag(scoreTag(player, "set${index + 1}")),
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1
+                )
+            }
+        }
         Text(
             text = "Points: $currentPoints",
-            modifier = Modifier
-                .padding(8.dp)
-                .testTag(scoreTag(player, "points")),
-            style = MaterialTheme.typography.titleMedium
+            modifier = Modifier.testTag(scoreTag(player, "points")),
+            style = MaterialTheme.typography.bodyMedium,
+            maxLines = 1
         )
-
-        // Display set scores (games won in each set)
-        games.forEachIndexed { index, gameScore ->
-            Text(
-                text = "Set ${index + 1}: $gameScore",
-                modifier = Modifier
-                    .padding(8.dp)
-                    .testTag(scoreTag(player, "set${index + 1}")),
-                style = MaterialTheme.typography.bodyLarge
-            )
-        }
     }
 }
 
