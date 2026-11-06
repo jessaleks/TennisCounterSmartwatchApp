@@ -88,6 +88,10 @@ fun scorePoint(state: GameState, player: Int): GameState {
         }
     }
 
+    if (newState.player1Sets >= newState.setsToWin || newState.player2Sets >= newState.setsToWin) {
+        newState.isMatchOver = true
+    }
+
     return newState
 }
 

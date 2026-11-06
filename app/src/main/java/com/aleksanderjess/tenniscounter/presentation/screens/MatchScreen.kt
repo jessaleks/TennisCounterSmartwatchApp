@@ -53,8 +53,7 @@ fun MatchScreen(navController: NavController, setsToWin: Int = 3) {
                 )
             }
         }
-    }
-
+    } else {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -94,6 +93,7 @@ fun MatchScreen(navController: NavController, setsToWin: Int = 3) {
                 Text("P2-")
             }
         }
+    }
     }
 }
 

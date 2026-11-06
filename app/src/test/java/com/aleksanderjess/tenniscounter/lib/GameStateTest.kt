@@ -86,4 +86,37 @@ class GameStateTest {
         val state = GameState(player1Points = 3, player2Points = 3)
         assertEquals("Deuce, Serving: Player 1", getScore(state))
     }
+
+    @Test
+    fun testScorePointSetsMatchOverWhenSetsToWinReached() {
+        val oneSetToWin = GameState(
+            setsToWin = 1,
+            player1Games = 5,
+            player2Games = 4,
+            player1Points = 3,
+            player2Points = 2,
+        )
+
+        val afterWinningSet = scorePoint(oneSetToWin, 1)
+
+        assertEquals(1, afterWinningSet.player1Sets)
+        assertTrue(afterWinningSet.isMatchOver)
+    }
+
+    @Test
+    fun testScorePointDoesNotEndMatchBeforeSetsToWin() {
+        val state = GameState(
+            setsToWin = 3,
+            player1Sets = 1,
+            player1Games = 5,
+            player2Games = 4,
+            player1Points = 3,
+            player2Points = 2,
+        )
+
+        val afterWinningSet = scorePoint(state, 1)
+
+        assertEquals(2, afterWinningSet.player1Sets)
+        assertFalse(afterWinningSet.isMatchOver)
+    }
 }
