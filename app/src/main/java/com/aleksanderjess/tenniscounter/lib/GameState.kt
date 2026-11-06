@@ -1,3 +1,5 @@
+package com.aleksanderjess.tenniscounter.lib
+
 import kotlin.math.abs
 
 data class GameState(
@@ -84,6 +86,10 @@ fun scorePoint(state: GameState, player: Int): GameState {
                 switchServer(newState)
             }
         }
+    }
+
+    if (newState.player1Sets >= newState.setsToWin || newState.player2Sets >= newState.setsToWin) {
+        newState.isMatchOver = true
     }
 
     return newState

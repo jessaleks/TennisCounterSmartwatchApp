@@ -1,20 +1,22 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "com.aleksanderjess.tenniscounter"
-    compileSdk = 35
+    compileSdk {
+        version = release(37) {
+            minorApiLevel = 2
+        }
+    }
 
     defaultConfig {
         applicationId = "com.aleksanderjess.tenniscounter"
         minSdk = 29
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
-
     }
 
     buildTypes {
@@ -30,25 +32,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
     buildFeatures {
         compose = true
-
     }
-    buildToolsVersion = "35.0.0"
+    buildToolsVersion = "37.0.0"
 }
 
 dependencies {
-    // AndroidX Test dependencies
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test:runner:1.4.0")
-    androidTestImplementation("androidx.test:rules:1.4.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.7.3")
-
-    // Espresso dependencies
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
     implementation(libs.play.services.wearable)
     implementation(platform(libs.compose.bom))
     implementation(libs.ui)
@@ -64,12 +54,22 @@ dependencies {
     implementation(libs.compose.material3)
     implementation(libs.material3.android)
     implementation(libs.ui.text.google.fonts)
-    implementation(libs.junit.jupiter)
-    implementation(libs.testng)
-    implementation(libs.ui.test.junit4.android)
 
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
+    testImplementation(libs.testng)
+
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.androidx.test.rules)
+    androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
-
+    androidTestImplementation(libs.ui.test.junit4)
+    androidTestImplementation(libs.navigation.testing)
+    debugImplementation(libs.ui.test.manifest)
     debugImplementation(libs.ui.tooling)
+}
 
+tasks.withType<org.gradle.api.tasks.testing.Test>().configureEach {
+    useJUnitPlatform()
 }

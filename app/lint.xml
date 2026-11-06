@@ -5,4 +5,10 @@
         <ignore path="res/drawable/tile_preview.png" />
         <ignore path="res/drawable-round/tile_preview.png" />
     </issue>
+    <!--
+        The app theme is the existing phone Material 3 scheme (color roles, contrast
+        variants, and Google Fonts typography). Wear Material 3 uses a different
+        ColorScheme and Typography, so switching MaterialTheme would change the UI.
+    -->
+    <issue id="WearMaterialTheme" severity="warning" />
 </lint>
