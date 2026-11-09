@@ -1,0 +1,88 @@
+name: TennisCounter
+options:
+  bundleIdPrefix: com.aleksanderjess.tenniscounter
+  deploymentTarget:
+    watchOS: "10.0"
+  createIntermediateGroups: true
+targets:
+  TennisCounter:
+    type: application
+    platform: watchOS
+    sources:
+      - path: TennisCounter
+    preBuildScripts:
+      - name: Build TennisCore Kotlin Framework
+        script: /bin/sh "$SRCROOT/Scripts/build-tennis-core.sh"
+        runOnlyForDeploymentPostprocessing: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aleksanderjess.tenniscounter.watchapp
+        PRODUCT_NAME: TennisCounter
+        SDKROOT: watchos
+        TARGETED_DEVICE_FAMILY: "4"
+        WATCHOS_DEPLOYMENT_TARGET: "10.0"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_WKWatchOnly: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_CFBundleDisplayName: Licznik tenisa
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        SWIFT_VERSION: "5.0"
+        ENABLE_PREVIEWS: YES
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        FRAMEWORK_SEARCH_PATHS:
+          - $(inherited)
+          - $(BUILT_PRODUCTS_DIR)
+        OTHER_LDFLAGS: $(inherited) -framework TennisCore
+        SKIP_INSTALL: NO
+        CODE_SIGN_STYLE: Automatic
+        CLANG_ENABLE_MODULES: YES
+  TennisCounterTests:
+    type: bundle.unit-test
+    platform: watchOS
+    sources:
+      - path: TennisCounterTests
+    dependencies:
+      - target: TennisCounter
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aleksanderjess.tenniscounter.watchapp.tests
+        WATCHOS_DEPLOYMENT_TARGET: "10.0"
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+        BUNDLE_LOADER: $(TEST_HOST)
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/TennisCounter.app/TennisCounter
+  TennisCounterUITests:
+    type: bundle.ui-testing
+    platform: watchOS
+    sources:
+      - path: TennisCounterUITests
+    dependencies:
+      - target: TennisCounter
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.aleksanderjess.tenniscounter.watchapp.uitests
+        WATCHOS_DEPLOYMENT_TARGET: "10.0"
+        GENERATE_INFOPLIST_FILE: YES
+        SWIFT_VERSION: "5.0"
+        TEST_TARGET_NAME: TennisCounter
+schemes:
+  TennisCounter:
+    build:
+      targets:
+        TennisCounter: all
+        TennisCounterTests: [test]
+        TennisCounterUITests: [test]
+    test:
+      targets:
+        - TennisCounterTests
+        - TennisCounterUITests
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

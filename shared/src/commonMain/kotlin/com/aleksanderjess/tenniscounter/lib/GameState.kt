@@ -48,7 +48,7 @@ fun isTiebreakCondition(state: GameState): Boolean =
     state.player1Games == 6 && state.player2Games == 6
 
 fun playerHasWonTiebreak(state: GameState): Boolean =
-    (state.player1TiebreakPoints >= 7 || state.player2TiebreakPoints >= 7) && Math.abs(state.player1TiebreakPoints - state.player2TiebreakPoints) >= 2
+    (state.player1TiebreakPoints >= 7 || state.player2TiebreakPoints >= 7) && abs(state.player1TiebreakPoints - state.player2TiebreakPoints) >= 2
 
 fun switchServer(state: GameState): GameState {
     state.servingPlayer = if (state.servingPlayer == 1) 2 else 1

@@ -1,6 +1,50 @@
 # Tennis Counter
 
-Wear OS app for counting a tennis match.
+Tennis match score counter for smartwatches: a Wear OS app (`:app`), a
+standalone watchOS app (`watchApp/`), and a shared Kotlin Multiplatform
+scoring core (`:shared`) consumed by both.
+
+## Prerequisites
+
+- JDK 17+ available as `JAVA_HOME` (Gradle runs the Android build and the
+  Kotlin/Native compile invoked by Xcode's build phase).
+- Android SDK `platforms;android-37.2` + `build-tools;37.0.0` (`ANDROID_HOME`
+  or `local.properties` `sdk.dir`).
+- For the watchOS app (macOS only): full Xcode with command-line tools
+  selected (`xcode-select -s /Applications/Xcode.app/Contents/Developer`).
+  A watchOS simulator runtime is required only to run the app or its tests
+  (`xcodebuild -downloadPlatform watchOS`), not for a plain build.
+- XcodeGen is needed only to regenerate `watchApp/TennisCounter.xcodeproj`
+  after editing `watchApp/project.yml` — the checked-in project builds
+  without it.
+- Deploying to a physical watch requires selecting your own development team
+  in Xcode; nothing is hardcoded.
+
+## watchOS compatibility
+
+- Deployment target is watchOS 10, but the effective minimum depends on
+  device architecture: arm64_32 watches need watchOS 10+, arm64 watches
+  need watchOS 26+ (the Kotlin/Native objects carry a `minos 26.0` build
+  stamp for the arm64 slice).
+- Verified on the installed watchOS 27.2 simulator only; physical device
+  installation was not tested. No App Store distribution support is claimed.
+
+## Build
+
+```bash
+# Wear OS app
+./gradlew :app:assembleDebug
+
+# Shared module tests (JVM / watchOS simulator)
+./gradlew :shared:testAndroidHostTest
+./gradlew :shared:watchosSimulatorArm64Test
+
+# watchOS app (regenerate the Xcode project with `xcodegen generate` inside
+# watchApp/ after editing project.yml)
+cd watchApp
+xcodebuild -project TennisCounter.xcodeproj -scheme TennisCounter \
+  -destination 'generic/platform=watchOS Simulator' CODE_SIGNING_ALLOWED=NO build
+```
 
 ## Sideload an APK
 

@@ -54,6 +54,8 @@ import com.aleksanderjess.tenniscounter.annotations.SquareWearPreview
 import com.aleksanderjess.tenniscounter.lib.GameState
 import com.aleksanderjess.tenniscounter.lib.MatchSession
 import com.aleksanderjess.tenniscounter.lib.awardPoint
+import com.aleksanderjess.tenniscounter.lib.decodeSession
+import com.aleksanderjess.tenniscounter.lib.encodeSession
 import com.aleksanderjess.tenniscounter.lib.getPointLabel
 import com.aleksanderjess.tenniscounter.lib.isDeuce
 import com.aleksanderjess.tenniscounter.lib.undoPoint
@@ -65,58 +67,9 @@ import com.aleksanderjess.tenniscounter.presentation.theme.ScoreBorderGray
 import com.aleksanderjess.tenniscounter.presentation.theme.TennisYellow
 import com.aleksanderjess.tenniscounter.presentation.theme.TileSurface
 
-private const val GAME_STATE_FIELD_COUNT = 13
-
-private fun GameState.toIntList(): List<Int> = listOf(
-    player1Points,
-    player2Points,
-    player1Games,
-    player2Games,
-    player1Sets,
-    player2Sets,
-    player1TiebreakPoints,
-    player2TiebreakPoints,
-    if (isTiebreak) 1 else 0,
-    servingPlayer,
-    tiebreakFirstServer,
-    if (isMatchOver) 1 else 0,
-    setsToWin,
-)
-
-private fun List<Int>.toGameState(offset: Int): GameState = GameState(
-    player1Points = this[offset],
-    player2Points = this[offset + 1],
-    player1Games = this[offset + 2],
-    player2Games = this[offset + 3],
-    player1Sets = this[offset + 4],
-    player2Sets = this[offset + 5],
-    player1TiebreakPoints = this[offset + 6],
-    player2TiebreakPoints = this[offset + 7],
-    isTiebreak = this[offset + 8] != 0,
-    servingPlayer = this[offset + 9],
-    tiebreakFirstServer = this[offset + 10],
-    isMatchOver = this[offset + 11] != 0,
-    setsToWin = this[offset + 12],
-)
-
 val MatchSessionSaver: Saver<MatchSession, List<Int>> = Saver(
-    save = { session ->
-        buildList {
-            add(session.previousStates.size)
-            session.previousStates.forEach { addAll(it.toIntList()) }
-            addAll(session.current.toIntList())
-        }
-    },
-    restore = { list ->
-        val count = list[0]
-        val previous = (0 until count).map { i ->
-            list.toGameState(1 + i * GAME_STATE_FIELD_COUNT)
-        }
-        MatchSession(
-            current = list.toGameState(1 + count * GAME_STATE_FIELD_COUNT),
-            previousStates = previous,
-        )
-    },
+    save = { session -> encodeSession(session) },
+    restore = { list -> decodeSession(list) },
 )
 
 private val matchRowHeights = listOf(18.dp, 80.dp, 18.dp, 48.dp)
