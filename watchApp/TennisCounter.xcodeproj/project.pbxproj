@@ -1,0 +1,573 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		195D1241155AEFA8BEFDA92D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B452857E6F15F895562EA4 /* ContentView.swift */; };
+		1C6520FE212F408A30D61D14 /* TennisCounterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF13E3056DD5334E9B59C4A /* TennisCounterUITests.swift */; };
+		390E4A0D2AF5D8162525CCC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76F705346350BD712A6B2042 /* Assets.xcassets */; };
+		A13C6B36B5AB785175F2380A /* MatchViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE1FB61C041EA9566F02D0C /* MatchViewModelTests.swift */; };
+		A5B6D2D0A1C99411E1F0C690 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19F2A8A7A27C84D2E6493AB /* Theme.swift */; };
+		B85A67075C7E27CF034F85A7 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B92559222090B24AF0178B4 /* SessionStore.swift */; };
+		C23C7E1BCF69804BE4DE3186 /* TennisCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD59C898610EEA7D39B6F918 /* TennisCounterApp.swift */; };
+		EE13365F4293E17350D7CB97 /* MatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E412175DABA98A5883CB176 /* MatchViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		03D1A6CE8B64A407CBB51A1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F72519E412BA4DA3C46CF23C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3906CAFDE09A1F8DF05A355;
+			remoteInfo = TennisCounter;
+		};
+		239C93FA1B4D23DCA0715504 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F72519E412BA4DA3C46CF23C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3906CAFDE09A1F8DF05A355;
+			remoteInfo = TennisCounter;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3705B2DF9E868B6FB1709112 /* TennisCounterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TennisCounterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AE1FB61C041EA9566F02D0C /* MatchViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewModelTests.swift; sourceTree = "<group>"; };
+		3AF13E3056DD5334E9B59C4A /* TennisCounterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisCounterUITests.swift; sourceTree = "<group>"; };
+		51EAE563619ADD42CE6406D3 /* TennisCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TennisCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76F705346350BD712A6B2042 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7B92559222090B24AF0178B4 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		7E412175DABA98A5883CB176 /* MatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewModel.swift; sourceTree = "<group>"; };
+		A19F2A8A7A27C84D2E6493AB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		AD59C898610EEA7D39B6F918 /* TennisCounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TennisCounterApp.swift; sourceTree = "<group>"; };
+		E2B452857E6F15F895562EA4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E348BCB2566B7EC3B5B826C2 /* TennisCounterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TennisCounterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		4064403313906244044E6324 = {
+			isa = PBXGroup;
+			children = (
+				43CFB3F12DAF61439CF6D677 /* TennisCounter */,
+				A5E752C5D6B6DF90C0707B12 /* TennisCounterTests */,
+				E751EA39ED67368F68193390 /* TennisCounterUITests */,
+				ADFC177DA4C7F3D3CEE820CE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		43CFB3F12DAF61439CF6D677 /* TennisCounter */ = {
+			isa = PBXGroup;
+			children = (
+				76F705346350BD712A6B2042 /* Assets.xcassets */,
+				E2B452857E6F15F895562EA4 /* ContentView.swift */,
+				7E412175DABA98A5883CB176 /* MatchViewModel.swift */,
+				7B92559222090B24AF0178B4 /* SessionStore.swift */,
+				AD59C898610EEA7D39B6F918 /* TennisCounterApp.swift */,
+				A19F2A8A7A27C84D2E6493AB /* Theme.swift */,
+			);
+			path = TennisCounter;
+			sourceTree = "<group>";
+		};
+		A5E752C5D6B6DF90C0707B12 /* TennisCounterTests */ = {
+			isa = PBXGroup;
+			children = (
+				3AE1FB61C041EA9566F02D0C /* MatchViewModelTests.swift */,
+			);
+			path = TennisCounterTests;
+			sourceTree = "<group>";
+		};
+		ADFC177DA4C7F3D3CEE820CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				51EAE563619ADD42CE6406D3 /* TennisCounter.app */,
+				3705B2DF9E868B6FB1709112 /* TennisCounterTests.xctest */,
+				E348BCB2566B7EC3B5B826C2 /* TennisCounterUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E751EA39ED67368F68193390 /* TennisCounterUITests */ = {
+			isa = PBXGroup;
+			children = (
+				3AF13E3056DD5334E9B59C4A /* TennisCounterUITests.swift */,
+			);
+			path = TennisCounterUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9186C42C81F4342C8FADFEF6 /* TennisCounterUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FE9B2033E50FEBA60325EB5 /* Build configuration list for PBXNativeTarget "TennisCounterUITests" */;
+			buildPhases = (
+				E6224AF5C3B46C9D382EF080 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37D77B2FC346FBE2B11EA8D9 /* PBXTargetDependency */,
+			);
+			name = TennisCounterUITests;
+			packageProductDependencies = (
+			);
+			productName = TennisCounterUITests;
+			productReference = E348BCB2566B7EC3B5B826C2 /* TennisCounterUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		A3906CAFDE09A1F8DF05A355 /* TennisCounter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 593983403DD2A74F19F1AA96 /* Build configuration list for PBXNativeTarget "TennisCounter" */;
+			buildPhases = (
+				33797D18CC8B5A1463270983 /* Build TennisCore Kotlin Framework */,
+				338332F52C4B91E03849D2F3 /* Sources */,
+				F5DA91DC301D9AFB3DABB50B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TennisCounter;
+			packageProductDependencies = (
+			);
+			productName = TennisCounter;
+			productReference = 51EAE563619ADD42CE6406D3 /* TennisCounter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B0F6640D907A0FE064EAB44D /* TennisCounterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A1C27DA5AC5E81A39C3E246 /* Build configuration list for PBXNativeTarget "TennisCounterTests" */;
+			buildPhases = (
+				310B18EA3AD3C5884DD6FE5F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				981D33C1C1BC35351673D03F /* PBXTargetDependency */,
+			);
+			name = TennisCounterTests;
+			packageProductDependencies = (
+			);
+			productName = TennisCounterTests;
+			productReference = 3705B2DF9E868B6FB1709112 /* TennisCounterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F72519E412BA4DA3C46CF23C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					9186C42C81F4342C8FADFEF6 = {
+						TestTargetID = A3906CAFDE09A1F8DF05A355;
+					};
+					A3906CAFDE09A1F8DF05A355 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 122A493D46DBE0837D9F82C7 /* Build configuration list for PBXProject "TennisCounter" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 4064403313906244044E6324;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = ADFC177DA4C7F3D3CEE820CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A3906CAFDE09A1F8DF05A355 /* TennisCounter */,
+				B0F6640D907A0FE064EAB44D /* TennisCounterTests */,
+				9186C42C81F4342C8FADFEF6 /* TennisCounterUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F5DA91DC301D9AFB3DABB50B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				390E4A0D2AF5D8162525CCC2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		33797D18CC8B5A1463270983 /* Build TennisCore Kotlin Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build TennisCore Kotlin Framework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"$SRCROOT/Scripts/build-tennis-core.sh\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		310B18EA3AD3C5884DD6FE5F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A13C6B36B5AB785175F2380A /* MatchViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		338332F52C4B91E03849D2F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				195D1241155AEFA8BEFDA92D /* ContentView.swift in Sources */,
+				EE13365F4293E17350D7CB97 /* MatchViewModel.swift in Sources */,
+				B85A67075C7E27CF034F85A7 /* SessionStore.swift in Sources */,
+				C23C7E1BCF69804BE4DE3186 /* TennisCounterApp.swift in Sources */,
+				A5B6D2D0A1C99411E1F0C690 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E6224AF5C3B46C9D382EF080 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C6520FE212F408A30D61D14 /* TennisCounterUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		37D77B2FC346FBE2B11EA8D9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3906CAFDE09A1F8DF05A355 /* TennisCounter */;
+			targetProxy = 03D1A6CE8B64A407CBB51A1C /* PBXContainerItemProxy */;
+		};
+		981D33C1C1BC35351673D03F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3906CAFDE09A1F8DF05A355 /* TennisCounter */;
+			targetProxy = 239C93FA1B4D23DCA0715504 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		239AF4A3F88223E94AF0F895 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.aleksanderjess.tenniscounter.watchapp.tests;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TennisCounter.app/TennisCounter";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		4897B354B0EF700355352177 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.aleksanderjess.tenniscounter.watchapp.uitests;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = TennisCounter;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		4E64E26CF2BB9A89FA122B44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+		8068E84DA709DEDBC2ABC827 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		944E0EF2EBEC13632BD1B082 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.aleksanderjess.tenniscounter.watchapp.uitests;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = TennisCounter;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		9C25778773FE67F2801E671B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.aleksanderjess.tenniscounter.watchapp.tests;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TennisCounter.app/TennisCounter";
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		EAE73FA5681EDE1B448D4AAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Licznik tenisa";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "$(inherited) -framework TennisCore";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aleksanderjess.tenniscounter.watchapp;
+				PRODUCT_NAME = TennisCounter;
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Release;
+		};
+		EE52F60C702EA204914ABA41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Licznik tenisa";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "$(inherited) -framework TennisCore";
+				PRODUCT_BUNDLE_IDENTIFIER = com.aleksanderjess.tenniscounter.watchapp;
+				PRODUCT_NAME = TennisCounter;
+				SDKROOT = watchos;
+				SKIP_INSTALL = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 10.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		122A493D46DBE0837D9F82C7 /* Build configuration list for PBXProject "TennisCounter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E64E26CF2BB9A89FA122B44 /* Debug */,
+				8068E84DA709DEDBC2ABC827 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3A1C27DA5AC5E81A39C3E246 /* Build configuration list for PBXNativeTarget "TennisCounterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				239AF4A3F88223E94AF0F895 /* Debug */,
+				9C25778773FE67F2801E671B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		593983403DD2A74F19F1AA96 /* Build configuration list for PBXNativeTarget "TennisCounter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE52F60C702EA204914ABA41 /* Debug */,
+				EAE73FA5681EDE1B448D4AAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		9FE9B2033E50FEBA60325EB5 /* Build configuration list for PBXNativeTarget "TennisCounterUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4897B354B0EF700355352177 /* Debug */,
+				944E0EF2EBEC13632BD1B082 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F72519E412BA4DA3C46CF23C /* Project object */;
+}
