@@ -13,6 +13,7 @@ data class GameState(
     var player2TiebreakPoints: Int = 0,
     var isTiebreak: Boolean = false,
     var servingPlayer: Int = 1, // 1 for Player 1, 2 for Player 2
+    var tiebreakFirstServer: Int = servingPlayer,
     var isMatchOver: Boolean = false,
     var setsToWin: Int = 3
 )
@@ -20,6 +21,16 @@ data class GameState(
 val scoreNames = listOf("0", "15", "30", "40")
 
 fun getScoreName(points: Int): String = scoreNames[minOf(points, 3)]
+
+fun getPointLabel(state: GameState, player: Int): String {
+    if (state.isTiebreak) {
+        return (if (player == 1) state.player1TiebreakPoints else state.player2TiebreakPoints).toString()
+    }
+    val points = if (player == 1) state.player1Points else state.player2Points
+    val opponentPoints = if (player == 1) state.player2Points else state.player1Points
+    if (playerHasAdvantage(state) && points > opponentPoints) return "AD"
+    return getScoreName(points)
+}
 
 fun isDeuce(state: GameState): Boolean =
     state.player1Points >= 3 && state.player1Points == state.player2Points
@@ -45,6 +56,7 @@ fun switchServer(state: GameState): GameState {
 }
 
 fun scorePoint(state: GameState, player: Int): GameState {
+    if (state.isMatchOver) return state
     val newState = state.copy()
 
     if (newState.isTiebreak) {
@@ -57,6 +69,7 @@ fun scorePoint(state: GameState, player: Int): GameState {
             newState.player1TiebreakPoints = 0
             newState.player2TiebreakPoints = 0
             newState.isTiebreak = false
+            newState.servingPlayer = 3 - newState.tiebreakFirstServer
         } else {
             val totalTiebreakPoints =
                 newState.player1TiebreakPoints + newState.player2TiebreakPoints
@@ -73,6 +86,7 @@ fun scorePoint(state: GameState, player: Int): GameState {
             if (isTiebreakCondition(newState)) {
                 newState.isTiebreak = true
                 switchServer(newState)
+                newState.tiebreakFirstServer = newState.servingPlayer
             } else {
                 if (playerHasWonSet(newState.player1Games, newState.player2Games)) {
                     newState.player1Sets++

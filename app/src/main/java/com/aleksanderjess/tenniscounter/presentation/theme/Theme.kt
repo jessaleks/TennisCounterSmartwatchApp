@@ -47,8 +47,8 @@ private val lightScheme = lightColorScheme(
 )
 
 private val darkScheme = darkColorScheme(
-    primary = primaryDark,
-    onPrimary = onPrimaryDark,
+    primary = TennisYellow,
+    onPrimary = Color.Black,
     primaryContainer = primaryContainerDark,
     onPrimaryContainer = onPrimaryContainerDark,
     secondary = secondaryDark,
@@ -63,12 +63,12 @@ private val darkScheme = darkColorScheme(
     onError = onErrorDark,
     errorContainer = errorContainerDark,
     onErrorContainer = onErrorContainerDark,
-    background = backgroundDark,
+    background = Color.Black,
     onBackground = onBackgroundDark,
-    surface = surfaceDark,
-    onSurface = onSurfaceDark,
+    surface = Color.Black,
+    onSurface = Color.White,
     surfaceVariant = surfaceVariantDark,
-    onSurfaceVariant = onSurfaceVariantDark,
+    onSurfaceVariant = NeutralSecondary,
     outline = outlineDark,
     outlineVariant = outlineVariantDark,
     scrim = scrimDark,
@@ -255,12 +255,7 @@ fun AppTheme(
 
     content: @Composable() () -> Unit
 ) {
-    val colorScheme = when {
-
-
-        darkTheme -> darkScheme
-        else -> lightScheme
-    }
+    val colorScheme = darkScheme
 
     MaterialTheme(
         colorScheme = colorScheme,

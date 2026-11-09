@@ -27,14 +27,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun WearTennisApp(navController: NavHostController) {
-    AppTheme {
-        NavHost(navController = navController, startDestination = Screen.SetWizard.route) {
+    NavHost(navController = navController, startDestination = Screen.SetWizard.route) {
 
-            composable(Screen.SetWizard.route) { SetWizardScreen(navController) }
-            composable(Screen.MatchScreen.route) { backStackEntry ->
-                val setsToWin = backStackEntry.arguments?.getString("setsToWin")?.toInt() ?: 3
-                MatchScreen(navController, setsToWin)
-            }
+        composable(Screen.SetWizard.route) { SetWizardScreen(navController) }
+        composable(Screen.MatchScreen.route) { backStackEntry ->
+            val setsToWin = backStackEntry.arguments?.getString("setsToWin")?.toInt() ?: 3
+            MatchScreen(navController, setsToWin)
         }
     }
 }

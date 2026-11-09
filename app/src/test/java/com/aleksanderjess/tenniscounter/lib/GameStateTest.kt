@@ -321,3 +321,188 @@ class GameStateTest {
         }
     }
 }
+
+class PointLabelAndServeTest {
+
+    private fun playPoints(state: GameState, player: Int, count: Int): GameState {
+        var s = state
+        repeat(count) { s = scorePoint(s, player) }
+        return s
+    }
+
+    private fun winGame(state: GameState, player: Int): GameState = playPoints(state, player, 4)
+
+    private fun reachTiebreak(firstServer: Int = 1): GameState {
+        var s = GameState(servingPlayer = firstServer)
+        repeat(6) {
+            s = winGame(s, 1)
+            s = winGame(s, 2)
+        }
+        return s
+    }
+
+    @Test
+    fun pointLabelsAreTennisScores() {
+        var s = GameState()
+        val expected = listOf("0", "15", "30", "40")
+        expected.forEachIndexed { i, label ->
+            assertEquals(label, getPointLabel(s, 1))
+            assertEquals(label, getPointLabel(s, 2))
+            if (i < expected.size - 1) {
+                s = scorePoint(s, 1)
+                s = scorePoint(s, 2)
+            }
+        }
+    }
+
+    @Test
+    fun deuceShowsFortyForBothPlayers() {
+        val s33 = GameState(player1Points = 3, player2Points = 3)
+        assertEquals("40", getPointLabel(s33, 1))
+        assertEquals("40", getPointLabel(s33, 2))
+        val s55 = GameState(player1Points = 5, player2Points = 5)
+        assertEquals("40", getPointLabel(s55, 1))
+        assertEquals("40", getPointLabel(s55, 2))
+    }
+
+    @Test
+    fun advantageShowsAdForLeaderAndFortyForOther() {
+        val s43 = GameState(player1Points = 4, player2Points = 3)
+        assertEquals("AD", getPointLabel(s43, 1))
+        assertEquals("40", getPointLabel(s43, 2))
+        val s34 = GameState(player1Points = 3, player2Points = 4)
+        assertEquals("40", getPointLabel(s34, 1))
+        assertEquals("AD", getPointLabel(s34, 2))
+    }
+
+    @Test
+    fun tiebreakLabelsAreNumeric() {
+        val s = GameState(isTiebreak = true, player1TiebreakPoints = 8, player2TiebreakPoints = 7)
+        assertEquals("8", getPointLabel(s, 1))
+        assertEquals("7", getPointLabel(s, 2))
+    }
+
+    @Test
+    fun pointProgressionResetsAfterGame() {
+        var s = GameState()
+        s = scorePoint(s, 1); assertEquals("15", getPointLabel(s, 1))
+        s = scorePoint(s, 1); assertEquals("30", getPointLabel(s, 1))
+        s = scorePoint(s, 1); assertEquals("40", getPointLabel(s, 1))
+        s = scorePoint(s, 1)
+        assertEquals(1, s.player1Games)
+        assertEquals("0", getPointLabel(s, 1))
+        assertEquals("0", getPointLabel(s, 2))
+    }
+
+    @Test
+    fun repeatedDeuceAdvantageCancellation() {
+        var s = GameState(player1Points = 3, player2Points = 3)
+        s = scorePoint(s, 1)
+        assertEquals("AD", getPointLabel(s, 1)); assertEquals("40", getPointLabel(s, 2))
+        s = scorePoint(s, 2)
+        assertEquals("40", getPointLabel(s, 1)); assertEquals("40", getPointLabel(s, 2))
+        s = scorePoint(s, 2)
+        assertEquals("40", getPointLabel(s, 1)); assertEquals("AD", getPointLabel(s, 2))
+        s = scorePoint(s, 1)
+        assertEquals("40", getPointLabel(s, 1)); assertEquals("40", getPointLabel(s, 2))
+    }
+
+    @Test
+    fun sixFourAndSevenFiveWinSets() {
+        var s = GameState(player1Games = 5, player2Games = 4)
+        s = winGame(s, 1)
+        assertEquals(1, s.player1Sets)
+        assertEquals(0, s.player1Games)
+
+        var s2 = GameState(player1Games = 6, player2Games = 5)
+        s2 = winGame(s2, 1)
+        assertEquals(1, s2.player1Sets)
+        assertFalse(s2.isTiebreak)
+    }
+
+    @Test
+    fun sixAllEntersTiebreak() {
+        val s = reachTiebreak()
+        assertTrue(s.isTiebreak)
+        assertEquals(6, s.player1Games)
+        assertEquals(6, s.player2Games)
+    }
+
+    @Test
+    fun tiebreakNotWonAtSevenSixWonAtEightSix() {
+        var s = GameState(
+            isTiebreak = true, player1Games = 6, player2Games = 6,
+            player1TiebreakPoints = 6, player2TiebreakPoints = 6,
+        )
+        s = scorePoint(s, 1)
+        assertTrue(s.isTiebreak)
+        s = scorePoint(s, 1)
+        assertFalse(s.isTiebreak)
+        assertEquals(1, s.player1Sets)
+    }
+
+    @Test
+    fun tiebreakServiceSequenceOneThenTwoForBothInitialServers() {
+        for (first in 1..2) {
+            var s = reachTiebreak(first)
+            val firstTbServer = s.servingPlayer
+            assertEquals(first, firstTbServer)
+            val second = 3 - firstTbServer
+            val expected = listOf(
+                firstTbServer,
+                second, second,
+                firstTbServer, firstTbServer,
+                second, second,
+                firstTbServer, firstTbServer,
+                second, second,
+            )
+            for ((i, server) in expected.withIndex()) {
+                assertEquals(
+                    server, s.servingPlayer,
+                    "first=$first pointIndex=$i",
+                )
+                val scorer = if (i % 2 == 0) 1 else 2
+                s = scorePoint(s, scorer)
+            }
+        }
+    }
+
+    @Test
+    fun nextSetServerIsOppositeTiebreakFirstServer() {
+        val scenarios = listOf(
+            listOf(7, 0), listOf(7, 5), listOf(8, 6), listOf(9, 7),
+        )
+        for (first in 1..2) {
+            for ((p1Pts, p2Pts) in scenarios) {
+                val before = GameState(
+                    isTiebreak = true,
+                    player1Games = 6, player2Games = 6,
+                    player1TiebreakPoints = p1Pts - 1,
+                    player2TiebreakPoints = p2Pts,
+                    tiebreakFirstServer = 3 - first,
+                    servingPlayer = 1,
+                )
+                val after = scorePoint(before, 1)
+                assertFalse(after.isTiebreak)
+                assertEquals(first, after.servingPlayer, "tiebreak first server was ${3 - first}")
+            }
+        }
+    }
+
+    @Test
+    fun tiebreakEntrySetsFirstServerAfterSwitch() {
+        var s = GameState(servingPlayer = 1, player1Games = 5, player2Games = 6, player1Points = 3, player2Points = 0)
+        s = scorePoint(s, 1)
+        assertTrue(s.isTiebreak)
+        assertEquals(2, s.servingPlayer)
+        assertEquals(2, s.tiebreakFirstServer)
+    }
+
+    @Test
+    fun scoringAfterMatchOverIsRefused() {
+        val s = GameState(setsToWin = 1, player1Sets = 1, isMatchOver = true)
+        val after = scorePoint(s, 2)
+        assertEquals(0, after.player2Points)
+        assertEquals(0, after.player2TiebreakPoints)
+    }
+}

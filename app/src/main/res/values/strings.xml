@@ -1,8 +1,27 @@
 <resources>
-    <string name="app_name">Tennis Counter</string>
+    <string name="app_name">Licznik tenisa</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">From the Square world,\nHello, %1$s!</string>
+    <string name="match_length">Format meczu</string>
+    <string name="format_one_set">Jeden set</string>
+    <string name="format_best_of_three">Do 2 wygranych setów</string>
+    <string name="format_best_of_five">Do 3 wygranych setów</string>
+    <string name="start_match">Rozpocznij mecz</string>
+    <string name="player_label">Gracz %1$d</string>
+    <string name="award_point">Dodaj punkt graczowi %1$d</string>
+    <string name="award_point_serving">Dodaj punkt graczowi %1$d, serwuje</string>
+    <string name="match_stats">Gemy %1$d–%2$d · Sety %3$d–%4$d</string>
+    <string name="undo">Cofnij</string>
+    <string name="tiebreak">Tie-break</string>
+    <string name="deuce">Równowaga</string>
+    <string name="match_winner">Wygrywa gracz %1$d</string>
+    <string name="sets_result">Sety %1$d–%2$d</string>
+    <string name="new_match">Nowy mecz</string>
+    <string name="sets_to_win">Sety do wygrania</string>
+    <string name="decrease_sets">Mniej setów</string>
+    <string name="increase_sets">Więcej setów</string>
+    <string name="add_point_hint">+ punkt</string>
 </resources>
